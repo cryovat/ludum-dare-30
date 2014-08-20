@@ -6,6 +6,8 @@
 
     cube: THREE.Mesh;
 
+    keyboard: THREEx.KeyboardState;
+
     constructor(element: HTMLElement) {
         this.element = element;
         this.scene = new THREE.Scene();
@@ -15,6 +17,11 @@
         this.renderer.setSize(element.clientWidth, element.clientHeight);
         this.element.appendChild(this.renderer.domElement);
 
+        this.keyboard = new THREEx.KeyboardState(this.renderer.domElement);
+
+        this.renderer.domElement.setAttribute("tabindex", "0");
+        this.renderer.domElement.focus();
+        
         var geometry = new THREE.BoxGeometry(1, 1, 1);
         var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
         
@@ -27,8 +34,13 @@
     private render() {
         requestAnimationFrame(() => this.render());
 
-        this.cube.rotation.x += 0.1;
-        this.cube.rotation.y += 0.1;
+        if (this.keyboard.pressed("left")) {
+            this.cube.rotation.y += 0.1;
+        } else if (this.keyboard.pressed("right")) {
+            this.cube.rotation.y -= 0.1;
+        }
+
+        //this.cube.rotation.y += 0.01;
 
         this.renderer.render(this.scene, this.camera);
     }
@@ -39,7 +51,7 @@
 }
 
 window.onload = () => {
-    var el = document.getElementById('content');
+    var el = document.getElementById('game');
    
     var game = new Game(el);
     game.start();

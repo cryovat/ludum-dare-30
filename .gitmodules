@@ -1,0 +1,3 @@
+[submodule "src/Scripts/threex.keyboardstate"]
+	path = src/Scripts/threex.keyboardstate
+	url = https://github.com/jeromeetienne/threex.keyboardstate

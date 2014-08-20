@@ -1,7 +1,66 @@
 ﻿body {
-    font-family: 'Segoe UI', sans-serif;
+    /*background-image: linear-gradient(to bottom, #212121 0%, #333333 300px);
+    background-repeat: no-repeat;*/
+    background-color: #F1F1F1;
+    color: #171516;
+    font-family: 'Roboto', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+header, footer, content {
+    width: 640px;
+    margin: 0 auto;
 }
 
 span {
     font-style: italic;
+}
+
+content {
+    display: block;
+    height: 480px;
+    margin-top: 40px;
+}
+
+footer {
+    margin-top: 10px;
+}
+
+canvas {
+    outline: none;
+}
+
+footer a {
+}
+
+footer p {
+    margin: 0;
+    float: left;
+    font-size: 12px;
+}
+
+#ludum-dare {
+    margin-right: 8px;
+    float: right;
+    background-image: url(Content/LudumDare.png);
+}
+
+#github {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    float: right;
+    background-image: url(Content/GitHub-Mark-32px.png);
+}
+
+footer:last-child:after {
+    content: '';
+    display: block;
+    clear: both;
 }

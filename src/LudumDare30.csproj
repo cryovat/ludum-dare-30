@@ -19,12 +19,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
+    <Content Include="Content\GitHub-Mark-32px.png" />
     <Content Include="index.html" />
+    <Content Include="Scripts\threex.keyboardstate\threex.keyboardstate.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Scripts\typings\threejs\three.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\threex.keyboardstate\threex.keyboardstate.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
