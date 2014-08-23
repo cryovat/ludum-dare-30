@@ -1,4 +1,8 @@
-﻿class Game {
+﻿/// <reference path="Scripts/input.ts"/>
+/// <reference path="Scripts/ui.ts"/>
+/// <reference path="Scripts/gamescreen.ts"/>
+
+class Game {
     element: HTMLElement;
     scene: THREE.Scene;
     camera: THREE.Camera;
@@ -6,18 +10,20 @@
 
     cube: THREE.Mesh;
 
-    keyboard: THREEx.KeyboardState;
+    input: Input.InputState;
+
+    screen: GameScreen.AbstractScreen;
 
     constructor(element: HTMLElement) {
         this.element = element;
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, element.clientWidth / element.clientHeight, 0.1, 1000);
-
+        
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(element.clientWidth, element.clientHeight);
         this.element.appendChild(this.renderer.domElement);
 
-        this.keyboard = new THREEx.KeyboardState(this.renderer.domElement);
+        this.input = new Input.InputState(this.element);
 
         this.renderer.domElement.setAttribute("tabindex", "0");
         this.renderer.domElement.focus();
@@ -29,20 +35,22 @@
         this.scene.add(this.cube);
 
         this.camera.position.z = 5;
-    }
 
+        this.screen = new GameScreen.AbstractScreen;
+    }
+    
     private render() {
         requestAnimationFrame(() => this.render());
 
-        if (this.keyboard.pressed("left")) {
-            this.cube.rotation.y += 0.1;
-        } else if (this.keyboard.pressed("right")) {
-            this.cube.rotation.y -= 0.1;
+        this.screen = this.screen.update(this.input, 0);
+
+        if (!this.screen) {
+            throw new Error("Critical error: Screen update method returned invalid value!");
         }
 
-        //this.cube.rotation.y += 0.01;
+        this.screen.render(this.camera, this.camera);
 
-        this.renderer.render(this.scene, this.camera);
+        this.input.update();
     }
 
     start() {
@@ -55,4 +63,7 @@ window.onload = () => {
    
     var game = new Game(el);
     game.start();
+
+    var w = new Ui.Widget();
+    w.draw();
 };
