@@ -21,7 +21,6 @@
     <Content Include="app.css" />
     <Content Include="Content\food.png" />
     <Content Include="Content\fuel.png" />
-    <Content Include="Content\GitHub-Mark-32px.png" />
     <Content Include="Content\GitHub-Mark-Light-32px.png" />
     <Content Include="Content\luxury.png" />
     <Content Include="Content\medical.png" />
@@ -36,21 +35,12 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="game.ts" />
-    <TypeScriptCompile Include="Scripts\Game\common.ts" />
-    <TypeScriptCompile Include="Scripts\Game\market.ts" />
-    <TypeScriptCompile Include="Scripts\Game\pub.ts" />
-    <TypeScriptCompile Include="Scripts\Game\shipyard.ts" />
-    <TypeScriptCompile Include="Scripts\input.ts" />
-    <TypeScriptCompile Include="Scripts\gamescreen.ts" />
-    <TypeScriptCompile Include="Scripts\state.ts" />
     <TypeScriptCompile Include="Scripts\typings\d3\d3.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\d3\plugins\d3.superformula.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery-2.1.1.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\threejs\three.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\threex.keyboardstate\threex.keyboardstate.d.ts" />
-    <TypeScriptCompile Include="Scripts\ui.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
