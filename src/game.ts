@@ -25,7 +25,7 @@ var addCard = (card: Card) => {
 
 addCard(new Card("fuel", "Fuel", 50));
 addCard(new Card("food", "Food", 100));
-addCard(new Card("medicine", "Medical supplies", 200));
+addCard(new Card("medicine", "Medicine", 200));
 addCard(new Card("luxury", "Luxury goods", 500));
 addCard(new Card("tech", "Technology", 500));
 
@@ -188,8 +188,6 @@ class GameMain2 {
         } else {
             alert("You don't have enough fuel to carry out the jump!");
         }
-
-        console.log(this.currentPlanet, planet, graph);
     }
 
     setPlanet(planet: any): void {
@@ -232,14 +230,22 @@ class GameMain2 {
 
             if (!enable) {
                 card.addClass("disabled");
+
+                if (v.type === "fuel") {
+                    card.on("mousemove", () => this.showFuelTooltip());
+                } else {
+                    card.on("mousemove", () => this.showNotAcceptedTooltip());
+                }
+
             } else {
 
                 sellable += prices[v.type];
 
                 card.on("click", () => this.playCard(planet, v.type, prices[v.type]));
                 card.on("mousemove", () => this.showSellTooltip(v.name, prices[v.type]));
-                card.on("mouseout", () => this.$tooltip.hide());
             }
+
+            card.on("mouseout", () => this.$tooltip.hide());
 
             $hand.append(card);
 
@@ -255,11 +261,19 @@ class GameMain2 {
 
             if (!enable) {
                 card.addClass("disabled");
+
+                if (playerHandFull) {
+                    card.on("mousemove", () => this.showHandFullTooltip());
+                } else {
+                    card.on("mousemove", () => this.showTooExpensiveTooltip());
+                }
+
             } else {
                 card.on("click", () => this.buyCard(planet, v.type, prices[v.type]));
                 card.on("mousemove", () => this.showBuyTooltip(v.name, prices[v.type]));
-                card.on("mouseout", () => this.$tooltip.hide());
             }
+
+            card.on("mouseout", () => this.$tooltip.hide());
 
             $market.append(card);
 
@@ -275,9 +289,9 @@ class GameMain2 {
 
 
         if (!this.state.hasFuel() && (!prices["fuel"] || prices["fuel"] > (this.state.credits + sellable))) {
-            alert("You've run out of fuel. You're at the journey's end...");
             d.empty();
             d.append($("<div>").addClass("gameOver").append($("<h2>").text("Game over")));
+            alert("You've run out of fuel. You're at the journey's end...");
         }
 
         d.show();
@@ -307,6 +321,63 @@ class GameMain2 {
 
         this.setPlanet(planet[ix]);
 
+    }
+
+    showNotAcceptedTooltip() {
+
+        var t = this.$tooltip, $summary;
+
+        t.empty();
+        t.append($("<h2>").text("Item not traded"));
+
+        t.append($summary = $("<div>").addClass("summary"));
+
+        t.append("The are no local traders that buy this type of item.");
+
+        this.showTooltip();
+
+    }
+
+    showFuelTooltip() {
+
+        var t = this.$tooltip, $summary;
+
+        t.empty();
+        t.append($("<h2>").text("Fuel card"));
+
+        t.append($summary = $("<div>").addClass("summary"));
+
+        t.append("Fuel cards are spent automatically when moving between systems.");
+
+        this.showTooltip();
+    }
+
+    showTooExpensiveTooltip() {
+
+        var t = this.$tooltip, $summary;
+
+        t.empty();
+        t.append($("<h2>").text("Card too expensive"));
+
+        t.append($summary = $("<div>").addClass("summary"));
+
+        t.append("You don't have enough credits to buy this card.");
+
+        this.showTooltip();
+    }
+
+    showHandFullTooltip() {
+
+        var t = this.$tooltip, $summary;
+
+        t.empty();
+        t.append($("<h2>").text("Hand full"));
+
+        t.append($summary = $("<div>").addClass("summary"));
+
+        t.append("Your hand is full. To buy this card, sell a commodity or travel to spend a fuel card.");
+
+        this.showTooltip();
     }
 
     showBuyTooltip(name: string, price: number) {
@@ -368,7 +439,7 @@ class GameMain2 {
         t.append($("<h3>").text("Trade:"));
         t.append($ul = $("<ul>"));
 
-        if (planet["trade"]) {
+        if (planet["trade"] && planet.trade.length > 0) {
 
             for (i in planet.trade) {
                 g = planet.trade[i];
@@ -418,7 +489,7 @@ class GameMain2 {
         this.$planetDash.hide();
 
         var force = d3.layout.force()
-            .linkDistance(function (d) { return d.value * 10; })
+            .linkDistance(function (d) { return d.value * 13; })
             .size([this.graphWidth, this.graphHeight]);
 
         d3.json("Content/starchart.json", (error, graph) => {
@@ -438,16 +509,26 @@ class GameMain2 {
                 .enter().append("line")
                 .attr("class", "link");
 
-            var node = this.svg.selectAll("node")
+            var gnodes = this.svg.selectAll("g.gnode")
                 .data(graph.nodes)
-                .enter().append("circle")
-                .attr("class", "node")
-                .attr("r", function (d) { return d.radius; })
-                .style("fill", function (d) { return color(d.group); })
-                .on("mouseover", (d) => this.showPlanetTooltip(d))
-                .on("mouseout", (d) => this.$tooltip.hide())
-                .on("click", (d) => this.tryMovePlanet(d, force))
-                .call(force.drag);
+                .enter()
+                .append("g")
+                .classed("gnode", true);
+
+            var node =
+                gnodes.append("circle")
+                    .attr("class", "node")
+                    .attr("r", function (d) { return d.radius; })
+                    .style("fill", function (d) { return color(d.group); })
+                    .on("mouseover", (d) => this.showPlanetTooltip(d))
+                    .on("mouseout", (d) => this.$tooltip.hide())
+                    .on("click", (d) => this.tryMovePlanet(d, force))
+                    .call(force.drag);
+
+            gnodes.append("text")
+                .attr("class", "planetLabel")
+                .attr("x", (d) => d.radius +5 )
+                .text(function (d) { return d.short; });
 
             node.append("title")
                 .text(function (d) { return d.name; });
@@ -458,8 +539,9 @@ class GameMain2 {
                     .attr("x2", function (d) { return d.target.x; })
                     .attr("y2", function (d) { return d.target.y; });
 
-                node.attr("cx", function (d) { return d.x; })
-                    .attr("cy", function (d) { return d.y; });
+                gnodes.attr("transform", function (d) {
+                    return 'translate(' + [d.x, d.y] + ')';
+                });  
             });
 
 
@@ -478,6 +560,6 @@ class GameMain2 {
 window.onload = () => {
     var el = document.getElementById('game');
 
-    var game = new GameMain2(el, 640, 300);
+    var game = new GameMain2(el, 640, 330);
     game.start();
 }; 

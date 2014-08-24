@@ -54,9 +54,9 @@ header {
     opacity: 0.15;
 }
 
-#github:hover {
-    opacity: 1;
-}
+    #github:hover {
+        opacity: 1;
+    }
 
 header:after {
     content: '';
@@ -77,16 +77,17 @@ header:after {
 .planetTooltip {
     position: absolute;
     width: 200px;
-    background: lightgray;
+    background: #111111;
     box-sizing: border-box;
     padding: 4px 8px;
+    color: lightgray;
     border: 1px solid gray;
     font-size: 12px;
 }
 
     .planetTooltip h2 {
         margin: 0 4px 0 0;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .planetTooltip h3 {
@@ -94,7 +95,7 @@ header:after {
         display: inline-block;
         margin: 0;
         padding: 0;
-        font-size: 12px;
+        font-size: 14px;
     }
 
         .planetTooltip h3:after {
@@ -102,13 +103,13 @@ header:after {
         }
 
     .planetTooltip ul {
-        display: inline-block;
+        display: inline;
         margin: 0;
         padding: 0;
     }
 
     .planetTooltip li {
-        display: inline-block;
+        display: inline;
     }
 
         .planetTooltip li:after {
@@ -116,11 +117,11 @@ header:after {
         }
 
     .planetTooltip .cheap {
-        color: darkcyan;
+        color: lawngreen;
     }
 
     .planetTooltip .expensive {
-        color: darkred;
+        color: salmon;
     }
 
 
@@ -128,16 +129,16 @@ header:after {
     background-color: darkgray;
     box-sizing: border-box;
     padding: 4px 8px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
     .planetDashboard h2 {
         margin: 0 4px 0 0;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .planetDashboard h3 {
-        font-size: 12px;
+        font-size: 14px;
         margin: 8px 0 0 0;
     }
 
@@ -232,12 +233,16 @@ dd .credits {
 }
 
 .gameOver {
-
 }
 
-.gameOver h2 {
-    font-size: 40px;
-    text-align: center;
-    color: red;
-    font-weight: bold;
+    .gameOver h2 {
+        font-size: 40px;
+        text-align: center;
+        color: red;
+        font-weight: bold;
+    }
+
+.planetLabel {
+    font-size: 10px;
+    fill: white;
 }
