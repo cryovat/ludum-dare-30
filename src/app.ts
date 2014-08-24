@@ -2,41 +2,49 @@
 /// <reference path="Scripts/ui.ts"/>
 /// <reference path="Scripts/gamescreen.ts"/>
 
-class Game {
+class GameMain {
     element: HTMLElement;
-    scene: THREE.Scene;
-    camera: THREE.Camera;
     renderer: THREE.Renderer;
 
-    cube: THREE.Mesh;
+    bgCamera: THREE.Camera;
+    uiCamera: THREE.Camera;
 
     input: Input.InputState;
 
     screen: GameScreen.AbstractScreen;
 
     constructor(element: HTMLElement) {
-        this.element = element;
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, element.clientWidth / element.clientHeight, 0.1, 1000);
-        
-        this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize(element.clientWidth, element.clientHeight);
-        this.element.appendChild(this.renderer.domElement);
 
-        this.input = new Input.InputState(this.element);
+        var width = element.clientWidth;
+        var height = element.clientHeight;
+        var aspect = width / height;
+
+        // Renderer initialization
+
+        this.element = element;
+
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize(width, height);
+        this.element.appendChild(this.renderer.domElement);
 
         this.renderer.domElement.setAttribute("tabindex", "0");
         this.renderer.domElement.focus();
-        
-        var geometry = new THREE.BoxGeometry(1, 1, 1);
-        var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        
-        this.cube = new THREE.Mesh(geometry, material);
-        this.scene.add(this.cube);
 
-        this.camera.position.z = 5;
+        // Camera initialization
 
-        this.screen = new GameScreen.AbstractScreen;
+        this.bgCamera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
+        this.uiCamera = new THREE.OrthographicCamera(- width / 2, width / 2, height / 2, - height / 2, 1, 10);
+        
+        this.bgCamera.position.z = 3;
+        this.uiCamera.position.z = 10;
+
+        // Input initialization
+
+        this.input = new Input.InputState(this.element);
+
+        // Bootstrapping
+
+        this.screen = new GameScreen.PlanetScreen();
     }
     
     private render() {
@@ -48,7 +56,7 @@ class Game {
             throw new Error("Critical error: Screen update method returned invalid value!");
         }
 
-        this.screen.render(this.camera, this.camera);
+        this.screen.render(this.renderer, this.bgCamera, this.uiCamera);
 
         this.input.update();
     }
@@ -61,9 +69,6 @@ class Game {
 window.onload = () => {
     var el = document.getElementById('game');
    
-    var game = new Game(el);
+    var game = new GameMain(el);
     game.start();
-
-    var w = new Ui.Widget();
-    w.draw();
 };

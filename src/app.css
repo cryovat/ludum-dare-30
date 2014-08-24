@@ -1,7 +1,7 @@
 ﻿body {
     /*background-image: linear-gradient(to bottom, #212121 0%, #333333 300px);
     background-repeat: no-repeat;*/
-    background-color: #F1F1F1;
+    background-color: #222222;
     color: #171516;
     font-family: 'Roboto', sans-serif;
     user-select: none;
@@ -15,32 +15,26 @@ header, footer, content {
     margin: 0 auto;
 }
 
-span {
-    font-style: italic;
-}
-
 content {
     display: block;
     height: 480px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
-footer {
+header {
     margin-top: 10px;
 }
 
-canvas {
-    outline: none;
-}
+    header a {
+        color: lightgray;
+    }
 
-footer a {
-}
-
-footer p {
-    margin: 0;
-    float: left;
-    font-size: 12px;
-}
+    header p {
+        color: gray;
+        margin: 0;
+        float: left;
+        font-size: 12px;
+    }
 
 #ludum-dare {
     margin-right: 8px;
@@ -56,11 +50,163 @@ footer p {
     white-space: nowrap;
     overflow: hidden;
     float: right;
-    background-image: url(Content/GitHub-Mark-32px.png);
+    background-image: url(Content/GitHub-Mark-Light-32px.png);
+    opacity: 0.15;
 }
 
-footer:last-child:after {
+#github:hover {
+    opacity: 1;
+}
+
+header:after {
     content: '';
     display: block;
     clear: both;
 }
+
+.node {
+    stroke: gray;
+    stroke-width: 2px;
+}
+
+.link {
+    stroke: gray;
+    stroke-width: 2px;
+}
+
+.planetTooltip {
+    background: lightgray;
+    box-sizing: border-box;
+    padding: 4px 8px;
+    border: 1px solid gray;
+    font-size: 12px;
+}
+
+    .planetTooltip h2 {
+        margin: 0 4px 0 0;
+        font-size: 14px;
+    }
+
+    .planetTooltip h3 {
+        font-weight: 500;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+    }
+
+        .planetTooltip h3:after {
+            content: '\00a0';
+        }
+
+    .planetTooltip ul {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+
+    .planetTooltip li {
+        display: inline-block;
+    }
+
+        .planetTooltip li:after {
+            content: '\00a0';
+        }
+
+    .planetTooltip .cheap {
+        color: darkcyan;
+    }
+
+    .planetTooltip .expensive {
+        color: darkred;
+    }
+
+
+.planetDashboard {
+    background-color: darkgray;
+    box-sizing: border-box;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+    .planetDashboard h2 {
+        margin: 0 4px 0 0;
+        font-size: 14px;
+    }
+
+    .planetDashboard h3 {
+        font-size: 12px;
+        margin: 8px 0 0 0;
+    }
+
+.marketCards {
+    border-top: 1px solid black;
+    color: black;
+    box-sizing: border-box;
+    padding: 8px 0;
+}
+
+.playerCards {
+    border-top: 1px solid black;
+    color: black;
+    box-sizing: border-box;
+    padding: 8px 0;
+}
+
+.card {
+    margin: 4px;
+    box-sizing: border-box;
+    padding: 4px 8px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.5) 2px 2px;
+    background-color: white;
+    display: inline-block;
+    width: 64px;
+    height: 96px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.card .sellPrice {
+    color: green;
+    font-weight: bold;
+}
+
+.fuel {
+    background-image: url('Content/fuel.png');
+}
+
+.food {
+    background-image: url('Content/food.png');
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+dl {
+    color: white;
+    border-bottom: 1px solid white;
+    text-align: right;
+    font-size: 12px;
+}
+
+
+dt, dd {
+    display: inline-block;
+}
+
+dt {
+    margin-left: 8px;
+    font-weight: bold;
+    width: auto;
+}
+
+dd .shipType {
+    width: 100px;
+}
+
+dd .credits {
+    width: 100px;
+}
+
