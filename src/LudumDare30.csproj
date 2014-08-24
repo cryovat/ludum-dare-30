@@ -23,6 +23,8 @@
     <Content Include="Content\fuel.png" />
     <Content Include="Content\GitHub-Mark-32px.png" />
     <Content Include="Content\GitHub-Mark-Light-32px.png" />
+    <Content Include="Content\luxury.png" />
+    <Content Include="Content\medical.png" />
     <Content Include="index.html" />
     <Content Include="LICENSE.txt" />
     <Content Include="Scripts\d3.js" />

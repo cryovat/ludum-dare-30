@@ -75,6 +75,8 @@ header:after {
 }
 
 .planetTooltip {
+    position: absolute;
+    width: 200px;
     background: lightgray;
     box-sizing: border-box;
     padding: 4px 8px;
@@ -167,6 +169,17 @@ header:after {
     background-repeat: no-repeat;
 }
 
+.cardPlaceholder {
+    margin: 4px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px dashed darkred;
+    box-shadow: rgba(0, 0, 0, 0) 2px 2px;
+    width: 64px;
+    height: 96px;
+}
+
 .card .sellPrice {
     color: green;
     font-weight: bold;
@@ -178,6 +191,14 @@ header:after {
 
 .food {
     background-image: url('Content/food.png');
+}
+
+.luxury {
+    background-image: url('Content/luxury.png');
+}
+
+.medicine {
+    background-image: url('Content/medical.png');
 }
 
 .disabled {
@@ -210,3 +231,13 @@ dd .credits {
     width: 100px;
 }
 
+.gameOver {
+
+}
+
+.gameOver h2 {
+    font-size: 40px;
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
