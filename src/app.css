@@ -77,7 +77,7 @@ header:after {
 .planetTooltip {
     position: absolute;
     width: 200px;
-    background: #111111;
+    background: rgba(40, 40, 40, 0.8);
     box-sizing: border-box;
     padding: 4px 8px;
     color: lightgray;
@@ -103,13 +103,14 @@ header:after {
         }
 
     .planetTooltip ul {
-        display: inline;
         margin: 0;
         padding: 0;
+        list-style-type: none;
     }
 
     .planetTooltip li {
-        display: inline;
+        margin: 0;
+        padding: 0;
     }
 
         .planetTooltip li:after {
@@ -124,11 +125,20 @@ header:after {
         color: salmon;
     }
 
+    .planetTooltip .premium {
+        color: darkturquoise;
+    }
+
+    .planetTooltip .legendary {
+        color: darkorchid;
+    }
+
 
 .planetDashboard {
-    background-color: darkgray;
+    background: url(Content/bg.png);
     box-sizing: border-box;
     padding: 4px 8px;
+    margin: 0;
     font-size: 14px;
 }
 
@@ -194,6 +204,18 @@ header:after {
     background-image: url('Content/food.png');
 }
 
+.xxx {
+    background-image: url('Content/xxx.png');
+}
+
+.ore {
+    background-image: url('Content/ore.png');
+}
+
+.tech {
+    background-image: url('Content/tech.png');
+}
+
 .luxury {
     background-image: url('Content/luxury.png');
 }
@@ -209,6 +231,7 @@ header:after {
 dl {
     color: white;
     border-bottom: 1px solid white;
+    margin-bottom: 0;
     text-align: right;
     font-size: 12px;
 }
@@ -232,17 +255,52 @@ dd .credits {
     width: 100px;
 }
 
-.gameOver {
+.gameover {
+    min-height: 200px;
+    background: url(Content/skull.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
 }
 
-    .gameOver h2 {
+    .gameover h2 {
         font-size: 40px;
-        text-align: center;
-        color: red;
+        text-shadow: 0px 0px 10px red;
+        color: white;
+        font-weight: bold;
+    }
+
+.victory {
+    min-height: 200px;
+    background: url(Content/victory.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+    .victory h2 {
+        font-size: 40px;
+        text-shadow: 0px 0px 10px darkgoldenrod;
+        color: white;
         font-weight: bold;
     }
 
 .planetLabel {
     font-size: 10px;
     fill: white;
+}
+
+.crosshair {
+    stroke: rgb(50,50,90);
+    stroke-width: 2px;
+}
+
+.cluster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -100;
+    overflow: hidden;
 }

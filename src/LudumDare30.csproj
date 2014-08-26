@@ -19,11 +19,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
+    <Content Include="Content\bg.png" />
     <Content Include="Content\food.png" />
     <Content Include="Content\fuel.png" />
     <Content Include="Content\GitHub-Mark-Light-32px.png" />
     <Content Include="Content\luxury.png" />
     <Content Include="Content\medical.png" />
+    <Content Include="Content\ore.png" />
+    <Content Include="Content\skull.png" />
+    <Content Include="Content\star.png" />
+    <Content Include="Content\tech.png" />
+    <Content Include="Content\victory.png" />
+    <Content Include="Content\xxx.png" />
     <Content Include="index.html" />
     <Content Include="LICENSE.txt" />
     <Content Include="Scripts\d3.js" />
@@ -41,6 +48,7 @@
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery-2.1.1.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\threejs\three.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\threex.keyboardstate\threex.keyboardstate.d.ts" />
+    <TypeScriptCompile Include="starfield.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
