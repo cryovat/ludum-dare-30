@@ -9,7 +9,7 @@ class Ship {
 }
 
 var ships: { [id: string]: Ship } = {
-    "shuttle": new Ship("MK I Shuttlecraft", 6, "The shuttles were never known for their elegance or defensive ability, but they're reliable and often the only thing an independent trader can afford. <strong>The shuttle can hold five items.</strong>")
+    "shuttle": new Ship("MK I Shuttlecraft", 6, "The shuttles were never known for their elegance or defensive ability, but they're reliable and often the only thing an independent trader can afford. <strong>The shuttle can hold six items.</strong>")
 };
 
 class Card {
@@ -546,7 +546,7 @@ class GameMain2 {
     start(): void {
 
 
-        var color = d3.scale.category20(), iterations: number = 150;
+        var color = d3.scale.category20(), iterations: number = 170;
 
         var $dl = $("<dl>");
         $dl.append("<dt>Ship</dt>");
@@ -646,12 +646,28 @@ class GameMain2 {
 
 }
 
+function fixHeight() {
+    if (window.innerHeight < 700) {
+        $("header").hide();
+    } else {
+        $("header").show();
+    }
+}
+
+window.addEventListener("resize", () => {
+    fixHeight();
+});
+
 window.onload = () => {
 
 
     var starfield = new Starfield(document);
     var el = document.getElementById('game');
 
-    var game = new GameMain2(el, 640, 330);
+    var game = new GameMain2(el, 640, 270);
     game.start();
+
+    fixHeight();
+
+
 }; 
